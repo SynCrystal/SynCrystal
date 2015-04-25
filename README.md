@@ -27,7 +27,7 @@ run the file SetPath.m first. It will automatically add all the MATLAB codes to 
 
 4. COPY RIGHT
 
-CrystalTool is copyright reserved. For further information, please contact 
+SynCrystal is copyright reserved. For further information, please contact 
 Contact information
 Jianfeng Lu at jianfeng@math.duke.edu
 Benedikt Wirth at Benedikt.Wirth@uni-muenster.de

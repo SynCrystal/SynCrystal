@@ -3,7 +3,7 @@ clear all
 
 isCompute = 1
 isShow = 1;
-for ex = [1,3,5,6,9,10,17]
+for ex = [1]%[0,1,3,5,6,9,10,17]
     ex
     %ex =17;
     switch ex

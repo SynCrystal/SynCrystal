@@ -21,8 +21,11 @@ int findmax2(double *A, int st, int L) {
     return pos;
 }
 
+/*This function computes the local wave vectors via weighted average.
+ 
+ By Haizhao Yang and Jianfeng Lu
+ */
 
-/*This function computes the agl in num_wave directions*/
 void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
                  int nrhs, const mxArray *prhs[]) /* Input variables */
 {
@@ -50,7 +53,7 @@ void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
     nrhs = 4;
     
     nlhs = 7;
-    int ndim = 3, dims[3] = {Nss[2],Nss[3],num_wave}, numm = (int)Nss[1]/num_wave/8, numm_R = (int)floor(Nss[0]/4);
+    int ndim = 3, dims[3] = {Nss[2],Nss[3],num_wave}, numm = (int)Nss[1]/num_wave/8, numm_R = (int)floor(Nss[0]/4.0);
     plhs[0] = mxCreateNumericArray(ndim,dims,mxDOUBLE_CLASS,mxREAL);
     plhs[1] = mxCreateNumericArray(ndim,dims,mxDOUBLE_CLASS,mxREAL);
     plhs[2] = mxCreateNumericArray(ndim,dims,mxDOUBLE_CLASS,mxREAL);
@@ -66,7 +69,7 @@ void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
     /* agl2 = mxGetPr(plhs[5]); */
     /* R2 = mxGetPr(plhs[6]); */
     
-    int L = round(Nss[1]/num_wave), maxpos, st, ed, stR, edR, moveStep, pos, sgn, temp_di, markPos;
+    int L = ceil(1.0*Nss[1]/num_wave), maxpos, st, ed, stR, edR, moveStep, pos, sgn, temp_di, markPos;  /* checked: round to ceil*/
     double *temp, energy_sum, *temp_R, *temp2, *tempss, tpR;
     temp = (double *)mxMalloc(sizeof(double)*L);
     temp2 = (double *)mxMalloc(sizeof(double)*Nss[1]);
@@ -84,12 +87,12 @@ void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
                         temp2[di] = temp2[di] + ss_energy(ci,di,ai,bi);
                 }
             }
-            moveStep = floor(L/4);
+            moveStep = floor(L/4.0);
             /*maxpos = fmod(findmax(temp2,Nss[1]),L);*/
             maxpos = findmax(temp2,Nss[1]);
-            markPos = floor(maxpos/L);
+            markPos = floor(1.0*maxpos/L);
             maxpos = maxpos - markPos*L;
-            moveStep = floor(maxpos-L/2);
+            moveStep = floor(maxpos-L/2.0);
             if (moveStep>=0) {
                 sgn = 1;
                 for (cnt=0;cnt<Nss[1]-moveStep;cnt++) {
@@ -138,10 +141,10 @@ void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
                 TTEng_1st(ai,bi,j) = energy_sum;
                 
                 /* /\*compute agl(ai,bi,j)*\/ */
-                 for (cnt = st; cnt <= ed; cnt++) {
-                /*     agl(ai,bi,j) = agl(ai,bi,j) + tempss[cnt]*cnt/energy_sum; */
-                     tempss[cnt] = 0;
-                 } 
+                for (cnt = st; cnt <= ed; cnt++) {
+                    /*     agl(ai,bi,j) = agl(ai,bi,j) + tempss[cnt]*cnt/energy_sum; */
+                    tempss[cnt] = 0;
+                }
                 /* agl(ai,bi,j) = agl(ai,bi,j) + sgn*moveStep; */
                 /*compute R(ai,bi,j)*/
                 /* change (st,ed) back to original coordinate */
@@ -524,10 +527,14 @@ void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
                 
             }
             for (j=0;j<num_wave;j++) {
-                W_sec(ai,bi,j) = TTEng_1st(ai,bi,j)/W_sec(ai,bi,j);
+                if (W_sec(ai,bi,j)==0) {
+                    W_sec(ai,bi,j) = 0;
+                }else {
+                    W_sec(ai,bi,j) = TTEng_1st(ai,bi,j)/W_sec(ai,bi,j);
+                }
                 if (R(ai,bi,j)==0) {
                     R(ai,bi,j) = R(ai,bi,markPos);
-                    agl(ai,bi,j) = agl(ai,bi,markPos) + (j-markPos)*pi/3;
+                    agl(ai,bi,j) = agl(ai,bi,markPos) + (j-markPos)*pi/num_wave;
                 }
             }
         }

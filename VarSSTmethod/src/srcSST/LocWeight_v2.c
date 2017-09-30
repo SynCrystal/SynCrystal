@@ -54,7 +54,7 @@ void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
     nrhs = 5;
     
     nlhs = 6;
-    int ndim = 3, dims[3] = {Nss[2],Nss[3],num_wave}, numm = (int)Nss[1]/num_wave/8, numm_R = (int)floor(Nss[0]/4);
+    int ndim = 3, dims[3] = {Nss[2],Nss[3],num_wave}, numm = (int)Nss[1]/num_wave/8, numm_R = (int)floor(Nss[0]/4.0);
     int LL = (int)Nss[1]/num_wave/4;
     plhs[0] = mxCreateNumericArray(ndim,dims,mxDOUBLE_CLASS,mxREAL);
     plhs[1] = mxCreateNumericArray(ndim,dims,mxDOUBLE_CLASS,mxREAL);
@@ -74,7 +74,7 @@ void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
     plhs[5] = mxCreateNumericArray(ndim,dims2,mxDOUBLE_CLASS,mxREAL);
     checktemp2 = mxGetPr(plhs[5]);
     
-    int L = round(Nss[1]/num_wave), maxpos, st, ed, stR, edR, moveStep, pos, sgn, temp_di, markPos;
+    int L = ceil(1.0*Nss[1]/num_wave), maxpos, st, ed, stR, edR, moveStep, pos, sgn, temp_di, markPos;
     double *temp, energy_sum, *temp_R, *temp2, *tempss, tpR;
     temp = (double *)mxMalloc(sizeof(double)*L);
     temp2 = (double *)mxMalloc(sizeof(double)*Nss[1]);
@@ -108,12 +108,12 @@ void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
             for (di=0;di<Nss[1];di++)
                 checktemp2(di,ai,bi) = temp2[di];
             /*mexPrintf("(%d,%f)  %f\n",LL,aglPos(ai,bi),aglPos[0]);*/
-            moveStep = floor(L/4);
+            moveStep = floor(L/4.0);
             /*maxpos = fmod(findmax(temp2,Nss[1]),L);*/
             maxpos = findmax(temp2,Nss[1]);
-            markPos = floor(maxpos/L);
+            markPos = floor(1.0*maxpos/L);
             maxpos = maxpos - markPos*L;
-            moveStep = floor(maxpos-L/2);
+            moveStep = floor(maxpos-L/2.0);
             if (moveStep>=0) {
                 sgn = 1;
                 for (cnt=0;cnt<Nss[1]-moveStep;cnt++) {
@@ -551,7 +551,7 @@ void mexFunction(int nlhs, mxArray *plhs[], /* Output variables */
                 W_sec(ai,bi,j) = TTEng_1st(ai,bi,j)/W_sec(ai,bi,j);
                 if (R(ai,bi,j)==0) {
                     R(ai,bi,j) = R(ai,bi,markPos);
-                    agl(ai,bi,j) = agl(ai,bi,markPos) + (j-markPos)*pi/3;
+                    agl(ai,bi,j) = agl(ai,bi,markPos) + (j-markPos)*pi/num_wave;
                 }
             }
         }

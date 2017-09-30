@@ -12,7 +12,7 @@
 
 close all;
 address = sprintf('results/Noise');
-algorithm = 1;
+algorithm = 2;
 noiseLevel = 1;
 switch noiseLevel
     case 1

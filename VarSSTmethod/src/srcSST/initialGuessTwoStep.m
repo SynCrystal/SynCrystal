@@ -2,7 +2,7 @@ function [radii angles BD TTEng_1st TTEng_2nd W_sec] = initialGuessTwoStep(fff,s
 % This code uses ss curvelet transforms to detect different oscillation directions.
 %% Main steps:
 % 1) Detect useful frequency band;
-% 2) Apply the synchrosqueezed transform SS_ct_polar() to obtain the ss energy
+% 2) Apply the synchrosqueezed transform SS_ct2_polar_v2() to obtain the ss energy
 % distribution ss_energy
 % 3) Apply bump detection algorithm Local_elastic() to estimate local wave
 % vectors
@@ -139,7 +139,7 @@ s_sc = parameters.s_sc;
 num_direction = 1;
 %----------------------------------------------------------------------
 %ss transform
-[ss_energy ss_avgdx ss_avgdy] = SS_ct_polar_v2(num_direction,X,SPg,NB,rad,is_real,[R_low,R_high],[0 2*pi],epsl,red,t_sc, s_sc);
+[ss_energy ss_avgdx ss_avgdy] = SS_ct2_polar_v2(num_direction,X,SPg,NB,rad,is_real,[R_low,R_high],[0 2*pi],epsl,red,t_sc, s_sc);
 ss_energy = permute(ss_energy,[3 4 1 2]);
 if type == 0  
     ss_energy = ss_energy(:,1:round(nnx/subsampleRate),:,:);

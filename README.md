@@ -15,15 +15,17 @@ VarSSTmethod: A collection of MATLAB and MEX routines which applies a variationa
 
 [2] H. Yang and L. Ying. Synchrosqueezed curvelet transform for two-dimensional mode decomposition. SIAM Journal on Mathematical Analysis, 46(3):2052–2083, 2014.
 
-[3] H. Yang and L. Ying. Robustness Analysis of Synchrosqueezed Transforms. Preprint.
+[3] H. Yang. Statistical Analysis of Synchrosqueezed Transforms. Applied and Computational Harmonic Analysis, 2017.
 
-[4] H. Yang, J. Lu, and L. Ying. Crystal image analysis using 2d synchrosqueezed trans- forms. arXiv:1402.1262 [math.NA], Submitted on 6 Feb 2014.
+[4] H. Yang, J. Lu, and L. Ying. Crystal image analysis using 2d synchrosqueezed transforms. arXiv:1402.1262 [math.NA], SIAM Multiscale Modeling and Simulation, 2015.
 
-[5] J. Lu, B. Wirth and H. Yang. Compbining 2d synchrosqueezed wave packet transforms with optimization for crystal image analysis. arXiv:1501.06254 [cond-mat.mtrl-sci], Submitted on 26 Jan 2015.
+[5] J. Lu, B. Wirth and H. Yang. Compbining 2d synchrosqueezed wave packet transforms with optimization for crystal image analysis. Journal of the Mechanics and Physics of Solids, 2016.
+
+[6] J. Lu and H. Yang. Phase Space Sketching for Crystal Image Analysis based on Synchrosqueezed Transforms. arXiv:1703.10877 [cond-mat.mtrl-sci]
 
 3. INSTALLING SYNLAB
 
-run the file SetPath.m first. It will automatically add all the MATLAB codes to your MATLAB path and compile all MEX files. After this, you can run all demo codes to see how to use this tool box.
+Run the file SetPath.m first. It will automatically add all the MATLAB codes to your MATLAB path and compile all MEX files. After this, you can run all demo codes to see how to use this tool box.
 
 4. COPY RIGHT
 
@@ -31,5 +33,5 @@ SynCrystal is copyright reserved. For further information, please contact
 Contact information
 Jianfeng Lu at jianfeng@math.duke.edu
 Benedikt Wirth at Benedikt.Wirth@uni-muenster.de
-Haizhao Yang at haizhao@stanford.edu
+Haizhao Yang at matyh@nus.edu.sg
 Lexing Ying at lexing@math.stanford.edu

@@ -135,7 +135,7 @@ if algorithm == 1
     myfilter=fspecial('gaussian',[3 3],0.5);
     agl = imfilter(ori, myfilter, 'replicate');
 else
-    [ss_energy ss_avgdx ss_avgdy] = SS_ct2_polar(num_direction,fff,SPg,NB,rad,is_real,R_low,R_high,epsl,red,t_sc, s_sc);
+    [ss_energy ss_avgdx ss_avgdy] = SS_ct2_polar_v2(num_direction,fff,SPg,NB,rad,is_real,[R_low,R_high],[0,2*pi],epsl,[red,1],t_sc, s_sc);
     [agl R TTEng_1st TTEng_2nd W_sec] = LocWeight(ss_energy,ss_avgdx,ss_avgdy,num_wave);
 end
 clear ss_energy ss_avgdx ss_avgdy;

@@ -3,7 +3,7 @@ function [R agl TTEng_1st TTEng_2nd W_sec ss_energy] = initialGuess(fff,subsampl
 % This code uses ss curvelet transforms to detect different oscillation directions.
 %% Main steps:
 % 1) Detect useful frequency band;
-% 2) Apply the synchrosqueezed transform SS_ct_polar() to obtain the ss energy
+% 2) Apply the synchrosqueezed transform SS_ct2_polar() to obtain the ss energy
 % distribution ss_energy
 % 3) Apply bump detection algorithm Local_elastic() to estimate local wave
 % vectors
@@ -136,8 +136,7 @@ num_direction = 1;
 dm = 0; dn = 0;
 %----------------------------------------------------------------------
 %ss transform
-[ss_energy ss_avgdx ss_avgdy] = SS_ct_polar(num_direction,fff,SPg,NB,rad,is_real,R_low,R_high,epsl,red,t_sc, s_sc);
-
+[ss_energy ss_avgdx ss_avgdy] = SS_ct2_polar_v2(num_direction,fff,SPg,NB,rad,is_real,[R_low,R_high],[0,2*pi],epsl,red,t_sc, s_sc);
 %----------------------------------------------------------------------
 %bump detection
 [agl R TTEng_1st TTEng_2nd W_sec] = LocWeight(ss_energy,ss_avgdx,ss_avgdy,num_wave);

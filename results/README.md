@@ -1,1 +1,1 @@
-All results will be automatically stored here.
+All results will be stored here.

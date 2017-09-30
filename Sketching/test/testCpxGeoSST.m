@@ -3,9 +3,7 @@ clear all
 
 isCompute = 1
 isShow = 1;
-for ex = [1]%[0,1,3,5,6,9,10,17]
-    ex
-    %ex =17;
+for ex = [11]
     switch ex
         case 1
             dName = 'ck1.gif';
@@ -24,22 +22,6 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             typeBD = 2; NB = 45;
             isRectangle = 0; isCheckType = 3; isLake = 1;
         case 2
-            dName = 'ck2.jpeg';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0;
-            fqThre = 3;
-            extention = 0.0;
-            rad = 1.5;
-            threBD = 0.5;
-            energyThre = 1.0;
-            patchSize = 256;
-            t_sc = 1; s_sc = 1;
-            isCompDeform = 1; red = [4,1];
-            fudgeFactor = 0.5; div = 1;
-            typeBD = 2; NB = 45;
-            isRectangle = 0; isCheckType = 3; isLake =1;
-        case 3
             dName = 'LS1.jpg';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -55,39 +37,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             fudgeFactor = 0.5; div = 2;
             typeBD = 2; NB = 45;
             isRectangle = 0; isCheckType = 3; isLake =1;
-        case 4
-            dName = 'melt.jpg';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0;
-            fqThre = 0;
-            extention = 0.0;
-            rad = 1.5;
-            threBD = 0.0;
-            energyThre = 1.0;
-            patchSize = 256;
-            t_sc = 0.7; s_sc = 0.6;
-            isCompDeform = 1; red = [8,1];
-            fudgeFactor = 0.5; div = 1;
-            typeBD = 2; NB = 30;
-            isRectangle = 0; isCheckType = 0; isLake =1;
-        case 5
-            dName = 'melt1.jpg';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0;
-            fqThre = 0;
-            extention = 0.1;
-            rad = 1;
-            threBD = 0.5;
-            energyThre = 2.7;
-            patchSize =512;
-            t_sc = 0.8; s_sc = 0.7;
-            isCompDeform = 1; red = [4,4];
-            fudgeFactor = 0.5; div = 2;
-            typeBD = 2; NB = 30;
-            isRectangle = 0; isCheckType = 3; isLake =1;
-        case 6
+        case 3
             dName = 'HVS-Direct-5A.tif';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -103,39 +53,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             fudgeFactor = 0.5; div = 4;
             typeBD = 2; NB = 45;
             isRectangle = 0; isCheckType = 0; isLake =1;
-        case 7
-            dName = 'pts1.jpg';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0;
-            fqThre = 0;
-            extention = 0.2;
-            rad = 1.5;
-            threBD = 0.5;
-            energyThre = 2.8;
-            patchSize = 512;
-            t_sc = 0.8; s_sc = 0.6;
-            isCompDeform = 1; red = [8,1];
-            fudgeFactor = 0.5; div = 4;
-            typeBD = 2; NB = 30;
-            isRectangle = 0; isCheckType = 0; isLake =0;
-        case 8
-            dName = 'pts2.jpg';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0;
-            fqThre = 0;
-            extention = 0.2;
-            rad = 1;
-            threBD = 0.5;
-            energyThre = 2.0;
-            patchSize = 512;
-            t_sc = 1; s_sc = 0.8;%t_sc = 0.8; s_sc = 0.7;
-            isCompDeform = 1; red = [8,1];
-            fudgeFactor = 0.5; div = 4;
-            typeBD = 2; NB = 30;
-            isRectangle = 0; isCheckType = 0; isLake =0;
-        case 9
+        case 4
             dName = 'pts3.jpg';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -151,7 +69,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             fudgeFactor = 0.5; div = 4;
             typeBD = 2; NB = 45;
             isRectangle = 0; isCheckType = 0; isLake =0;
-        case 10
+        case 5
             dName = 'ITF2.png';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -168,7 +86,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             typeBD = 1; NB = 45;
             isRectangle = 0; isCheckType = 0; isLake =0;
             
-        case 12
+        case 6
             dName = '0000731.tif';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -184,7 +102,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             fudgeFactor = 0.5; div = 2;
             typeBD = 2; NB = 45;
             isRectangle = 0; isCheckType = 0; isLake =0;
-        case 13
+        case 7
             dName = '0001025.tif';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -200,7 +118,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             fudgeFactor = 0.5; div = 2;
             typeBD = 2; NB = 45;
             isRectangle = 0; isCheckType = 0; isLake =0;
-        case 14
+        case 8
             dName = '0005281.tif';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -216,7 +134,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             fudgeFactor = 0.5; div = 2;
             typeBD = 2; NB = 45;
             isRectangle = 0; isCheckType = 0; isLake =0;
-        case 15
+        case 9
             dName = '0013786.tif';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -232,7 +150,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             fudgeFactor = 0.5; div = 2;
             typeBD = 2; NB = 45;
             isRectangle = 0; isCheckType = 0; isLake =0;
-        case 16
+        case 10
             dName = '0013842.tif';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -248,7 +166,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             fudgeFactor = 0.5; div = 2;
             typeBD = 2; NB = 45;
             isRectangle = 0; isCheckType = 0; isLake =0;
-        case 17
+        case 11
             dName = '0013891.tif';
             R_low2 = 0; R_high2 = 0;
             R_low3 = 0; R_high3 = 0;
@@ -263,106 +181,7 @@ for ex = [1]%[0,1,3,5,6,9,10,17]
             isCompDeform = 1; red = [8,4];%[10,4];
             fudgeFactor = 0.5; div = 2;
             typeBD = 2; NB = 45;
-            isRectangle = 0; isCheckType = 3; isLake =0;
-        case 18
-            dName = 'gray_0.66.png';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0;
-            fqThre = 0;
-            extention = 0.0;
-            rad = 1;
-            threBD = 0.0;
-            energyThre = 2.0;
-            patchSize = 512;
-            t_sc = 1; s_sc = 0.8;
-            isCompDeform = 1; red = [10,1];
-            fudgeFactor = 0.5; div = 2;
-            typeBD = 2; NB = 45;
-            isRectangle = 0; isCheckType = 0; isLake =0;
-        case 19
-            dName = 'gray_0.70.png';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0;
-            fqThre = 0;
-            extention = 0.0;
-            rad = 1;
-            threBD = 0.0;
-            energyThre = 2.0;
-            patchSize = 512;
-            t_sc = 1; s_sc = 0.8;
-            isCompDeform = 1; red = [10,1];
-            fudgeFactor = 0.5; div = 2;
-            typeBD = 2; NB = 45;
-            isRectangle = 0; isCheckType = 0; isLake =0;
-        case 20
-            dName = 'gray_0.76.png';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0;
-            fqThre = 0;
-            extention = 0.0;
-            rad = 1;
-            threBD = 0.0;
-            energyThre = 2.0;
-            patchSize = 512;
-            t_sc = 1; s_sc = 0.8;
-            isCompDeform = 1; red = [10,1];
-            fudgeFactor = 0.5; div = 2;
-            typeBD = 2; NB = 45;
-            isRectangle = 0; isCheckType = 0; isLake =0;
-        case 21
-            dName = 'gray_0.83.png';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0;
-            fqThre = 0;
-            extention = 0.0;
-            rad = 1;
-            threBD = 0.0;
-            energyThre = 2.0;
-            patchSize = 512;
-            t_sc = 1; s_sc = 0.8;
-            isCompDeform = 1; red = [10,1];
-            fudgeFactor = 0.5; div = 2;
-            typeBD = 2; NB = 45;
-            isRectangle = 0; isCheckType = 0; isLake =0;
-            
-            
-        case 23
-            dName = 'Sergei_2_2.png';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0.2;
-            fqThre = 0;
-            extention = 0.2;
-            rad = 1;
-            threBD = 0.0;
-            energyThre = 2.0;
-            patchSize = 512;
-            t_sc = 1; s_sc = 0.8;
-            isCompDeform = 1; red = [10,4];
-            fudgeFactor = 0.5; div = 2;
-            typeBD = 2; NB = 15;
-            isRectangle = 0; isCheckType = 3; isLake = 1;
-            
-        case 24
-            dName = 'Sergei_1_1.png';
-            R_low2 = 0; R_high2 = 0;
-            R_low3 = 0; R_high3 = 0;
-            spExtention = 0.2;
-            fqThre = 0;
-            extention = 0.2;
-            rad = 1;
-            threBD = 0.0;
-            energyThre = 2.0;
-            patchSize = 512;
-            t_sc = 1; s_sc = 0.8;
-            isCompDeform = 0; red = [8,4];
-            fudgeFactor = 0.5; div = 8;
-            typeBD = 2; NB = 30;
-            isRectangle = 0; isCheckType = 3; isLake = 2;
+            isRectangle = 0; isCheckType = 3; isLake =0
     end
     
     img = double(imread(dName));

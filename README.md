@@ -10,6 +10,8 @@ SSTmethod: A collection of MATLAB and MEX routines which applies 2D synchrosquee
 
 VarSSTmethod: A collection of MATLAB and MEX routines which applies a variational model to optimize the crystal analysis results provided by 2D synchrosqueezed transforms. Detailed description of this method is in [5]. 
 
+Sketching: A phase space sketching idea for crystal image classification. 
+
 
 [1] H. Yang and L. Ying. Synchrosqueezed wave packet transform for 2d mode decompo- sition. SIAM Journal on Imaging Sciences, 6(4):1979–2009, 2013.
 
@@ -23,9 +25,9 @@ VarSSTmethod: A collection of MATLAB and MEX routines which applies a variationa
 
 [6] J. Lu and H. Yang. Phase Space Sketching for Crystal Image Analysis based on Synchrosqueezed Transforms. arXiv:1703.10877 [cond-mat.mtrl-sci]
 
-3. INSTALLING SYNLAB
+3. INSTALLING SYNCRYSTAL
 
-Run the file SetPath.m first. It will automatically add all the MATLAB codes to your MATLAB path and compile all MEX files. After this, you can run all demo codes to see how to use this tool box.
+Run the file SynCrystal_startup.m first. It will automatically add all the MATLAB codes to your MATLAB path and compile all MEX files. After this, you can run all demo codes to see how to use this tool box.
 
 4. COPY RIGHT
 

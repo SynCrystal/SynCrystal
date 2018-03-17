@@ -1,4 +1,4 @@
-function [typeMatCell,refSktCell,R_high,refPos] = skeletonCls(phi,para)
+function [typeMatCell,refSktCell,R_high,refPos,timeRep,timeCls,timeSSTt] = skeletonCls(phi,para)
 % This is the main code for analyzing crystal images
 %
 % Input:
@@ -23,11 +23,15 @@ numn = n/0.5/para.N-1;
 
 refSktCell = cell(numm,numn);
 typeMatCell = cell(numm,numn);
+timeRep = 0;
+timeSSTt = 0;
+timeCls = 0;
 %% Main loop for the analysis of each patch
 [numm numn]
 for cntm = 1:numm
     for cntn = 1:numn
-        [cntm cntn]
+        %[cntm cntn]
+        
         phiTemp = phi((1:para.N)+(cntm-1)*para.N/2,(1:para.N)+(cntn-1)*para.N/2);
         % Zero padding for non-periodic image
         [m n] = size(phiTemp);
@@ -49,14 +53,18 @@ for cntm = 1:numm
         
         % Search for peaks
         R_low = min(para.R_low2,para.R_low3)*(1-para.spExtention); R_high = 2*max(para.R_high2,para.R_high3)*(1+para.spExtention);
-        skeletonWhole  = skeletonPolar(para.num_direction,phiTemp,para.SPg,para.NB,para.rad,para.is_real,...
+        [skeletonWhole,~,~,~,~,~,~,timeSST,timeSkt]  = skeletonPolar(para.num_direction,phiTemp,para.SPg,para.NB,para.rad,para.is_real,...
             R_low,R_high,para.epsl,para.red,para.t_sc,para.s_sc,para.deformFactor,para.numAgl,para.isScale);
         szSSTWhole = size(skeletonWhole);
         pos1 = gdSzType:gdSzType:szSSTWhole(3)-gdSzType; pos2 = gdSzType:gdSzType:szSSTWhole(4)-gdSzType;
         skeleton = skeletonWhole(:,:,pos1,pos2);
         szSST = size(skeleton);
+        timeRep = timeRep + timeSkt;
+        timeSSTt = timeSSTt + timeSST;
+        
         figure;imagesc(skeleton(:,:,floor(szSST(3)/2), floor(szSST(4)/2))); colormap(1-gray);axis xy; colorbar;
         
+        tic;
         skeleton = reshape(skeleton,[szSST(1),szSST(2),szSST(3)*szSST(4)]);
         [adjMat,~] = AdjMatSkeleton(skeleton,sigma,para.distType,para.clsThre);
         [group_resid , ~, ~ , num_group_resid] = SpectralClustering_est(adjMat,3);
@@ -95,7 +103,7 @@ for cntm = 1:numm
             refSktCell{cntm,cntn}{cnt} = refCell{cnt};
         end
         typeMatCell{cntm,cntn} = reshape(typeMatCell{cntm,cntn},[szSST(3),szSST(4)]);
-        
+        timeCls = timeCls + toc;
         if 1
             pic = figure;imagesc(skeletonShow(typeMatCell{cntm,cntn},512));axis image;set(gca,'xtick',[]);set(gca,'ytick',[]);colorbar;colormap (1-gray);
             hold on; sz = size(typeMatCell{cntm,cntn});
@@ -123,6 +131,8 @@ for cntm = 1:numm
             end
         end
         
-        typeMatCell{cntm,cntn} = skeletonPick(skeletonWhole,refSktCell{cntm,cntn},para);
+       % typeMatCell{cntm,cntn} =
+       % skeletonPick(skeletonWhole,refSktCell{cntm,cntn},para); % refine
+       % the result using identified reference lattice representation
     end
 end

@@ -1,5 +1,6 @@
 close all
 clear all
+warning off;
 
 % This code is to test the classification algorithm by phase space
 % sketching using synthetic examples in the paper.
@@ -20,6 +21,7 @@ NB = [30,35];
 isLake = 0;
 gdSzType = 5;
 patchSize = 512;
+
 
 for ex = 1:5
     switch ex
@@ -258,20 +260,33 @@ for ex = 1:5
     tic;
     [~,info,para] = crystalInfo(phi,para,is_show,numAtom,extention,fudgeFactor,fqThre*2);
     toc
-    t = cputime;
-    [typeMat,refType,R_high,refPos] = skeletonCls(phi,para);
-    e = cputime-t
+    [typeMat,refType,R_high,refPos,timeRep,timeCls,timeSSTt] = skeletonCls(phi,para);
+    timeRep
+    timeCls
+    timeSSTt
     
-    % close all
-    pic = figure;imagesc(skeletonShow(typeMat{1},512));axis image;set(gca,'xtick',[]);set(gca,'ytick',[]);colorbar;colormap (1-gray);
-    set(gca, 'FontSize', 16);
-    b=get(gca);
-    set(b.XLabel, 'FontSize', 16);set(b.YLabel, 'FontSize', 16);set(b.ZLabel, 'FontSize', 16);set(b.Title, 'FontSize', 16);
-    head = sprintf('./results/clsTypeFnl%d.fig',ex);
-    saveas(pic,head);
-    head = sprintf('./results/clsTypeFnl%d.png',ex);
-    saveas(pic,head);
+%     % close all
+%     pic = figure;imagesc(skeletonShow(typeMat{1},512));axis image;set(gca,'xtick',[]);set(gca,'ytick',[]);colorbar;colormap (1-gray);
+%     set(gca, 'FontSize', 16);
+%     b=get(gca);
+%     set(b.XLabel, 'FontSize', 16);set(b.YLabel, 'FontSize', 16);set(b.ZLabel, 'FontSize', 16);set(b.Title, 'FontSize', 16);
+%     head = sprintf('./results/clsTypeFnl%d.fig',ex);
+%     saveas(pic,head);
+%     head = sprintf('./results/clsTypeFnl%d.png',ex);
+%     saveas(pic,head);
     
+    if (ex == 1) || (ex == 3) || (ex == 4) % to get the successful rate of other examples, please modify the reference locations below
+        szM = size(typeMat{1});
+        numErr = 0;
+        for cnti = 1:2
+            for cntj = 1:2
+                typeMat{1}(round(3*end/8)+szM(1)*(cnti-1)/2,round(3*end/8)+szM(2)*(cntj-1)/2)
+                pos = find(typeMat{1}((1:end/2)+szM(1)*(cnti-1)/2,(1:end/2)+szM(2)*(cntj-1)/2)~= typeMat{1}(round(3*end/8)+szM(1)*(cnti-1)/2,round(3*end/8)+szM(2)*(cntj-1)/2));
+                numErr = numErr + numel(pos);
+            end
+        end
+        sucessRate = 1-numErr/prod(szM)
+    end
     close all;
 end
 

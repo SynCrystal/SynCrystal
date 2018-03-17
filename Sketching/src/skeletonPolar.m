@@ -1,4 +1,4 @@
-function [skeleton,kb,avgdx,avgdy,kk1,kk2,cc] = skeletonPolar(num_direction,fff,SPg,NB,rad,is_real,R_low,R_high,epsl,red,t_sc, s_sc,deformFactor,numAgl,isScale,is_cos)
+function [skeleton,kb,avgdx,avgdy,kk1,kk2,cc,timeSST,timeSkt] = skeletonPolar(num_direction,fff,SPg,NB,rad,is_real,R_low,R_high,epsl,red,t_sc, s_sc,deformFactor,numAgl,isScale,is_cos)
 %Input:
 %fff is the image
 %SPg(1) is the number of samples in the vertical direction in the image
@@ -51,6 +51,7 @@ SPx = SPg(1); SPy = SPg(2);
 
 %ccc is the general curvelet coefficients
 %aaa and bbb are the general curvelet coefficients with the derivatives in b_1 and b_2
+tic;
 [ccc aaa bbb] = gdct2_fwd_red(fff,is_real,[SPx SPy],R_high,R_low,rad,is_cos, t_sc, s_sc, red);
 
 ncl = numel(ccc);
@@ -105,9 +106,11 @@ if(1)
     avgdx(pos) = avgdx(pos)./kb(pos);
     avgdy(pos) = avgdy(pos)./kb(pos);
 end
+timeSST = toc;
 
 if (1) % compute the time-frequency skeleton using a coarse grid
     % find scaleN and shift in angle
+    tic;
     [scaleN,shiftAgl] = skeletonPeakShift(kb,avgdx,avgdy);
     pos = find(scaleN~=0);
     minScale = min(scaleN(pos));
@@ -167,6 +170,7 @@ if (1) % compute the time-frequency skeleton using a coarse grid
             skeleton(:,:,cnt1,cnt2) = circshift(skeleton(:,:,cnt1,cnt2),-shift,2);
         end
     end
+    timeSkt = toc;
 end
 
 

@@ -11,7 +11,7 @@
 clear; close all;
 % NOTE : the following line must be modified with the path to the
 % uiuc database in YOUR system.
-path_to_db = './scatnet/data/crystal/fig12/';
+path_to_db = './external/scatnet/scatnet/data/crystal/fig12/';
 src = syn_src(path_to_db);
 db_name = 'syn12';
 
